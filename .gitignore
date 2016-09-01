@@ -1,7 +1,8 @@
+venv
+*.pyc
+staticfiles
+.env
+.direnv/
+__pycache__
 .DS_Store
 .envrc
-.env
-.direnv
-__pycache__
-*.pyc
-secrets.py
