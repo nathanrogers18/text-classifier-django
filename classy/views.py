@@ -19,14 +19,26 @@ def classifier(request, pk):
     labels = {corpi.category for corpi in corpus}
     context = {'classifier': classifier, 'labels': labels}
     if request.POST:
-        print("HELLO")
-        print(request.POST)
         text = request.POST.get('text')
         classifier.train()
         prediction = classifier.predict(text)
-        print(prediction)
         context['text'] = text
         context['prediction'] = prediction
         return render(request, 'classy/classifier.html', context)
     else:
         return render(request, 'classy/classifier.html', context)
+
+
+def trainer(request, pk):
+    classifier = Classifier.objects.get(pk=pk)
+    corpus = classifier.corpus_set.all()
+    labels = {corpi.category for corpi in corpus}
+    context = {'classifier': classifier, 'labels': labels}
+    if request.POST:
+        print("POSTING")
+        text = request.POST.get('training_text')
+        label = request.POST.get('label')
+        classifier.add_corpus(text, label)
+        return render(request, 'classy/trainer.html', context)
+    else:
+        return render(request, 'classy/trainer.html', context)
