@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
@@ -7,7 +7,14 @@ from .models import Classifier
 
 
 def index(request):
-    return render(request, 'classy/index.html', context={})
+    visible_classifiers = Classifier.objects.filter(is_visible=True)
+    classifiers = [(classifier.id, classifier.name) for classifier in visible_classifiers]
+    context = {'classifiers': classifiers}
+    if request.POST:
+        classifier_id = int(request.POST.get('classifier'))
+        return redirect('classifier', pk=classifier_id)
+    else:
+        return render(request, 'classy/index.html', context)
 
 
 def classifier(request, pk):
@@ -15,11 +22,6 @@ def classifier(request, pk):
     corpus = classifier.corpus_set.all()
     labels = {corpi.category for corpi in corpus}
     context = {'classifier': classifier, 'labels': labels}
-
-    return render(request, 'classy/classifier.html', context)
-
-
-def signin(request):
     if request.POST:
         text = request.POST.get('text')
         classifier.train()
@@ -44,6 +46,10 @@ def trainer(request, pk):
         return render(request, 'classy/trainer.html', context)
     else:
         return render(request, 'classy/trainer.html', context)
+
+
+def signin(request):
+    if request.POST:
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
@@ -71,7 +77,6 @@ def register(request):
                                         password=user.cleaned_data['password1'])
                 login(request, new_user)
                 return HttpResponseRedirect("/profile/{}".format(new_user.id))
-
         else:
             user = UserCreationForm()
     context = {'form': UserCreationForm()}
