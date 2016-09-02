@@ -1,0 +1,25 @@
+{% extends "classy/base.html" %}
+{% block body %}
+      <div class="container">
+        <div class="row">
+          <h1>Hello, {{ user.username }}!</h1>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Your Classifiers</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <ul>
+              {% for classifier in user.classifier_set.all %}
+              <li>{{ classifier.name }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
