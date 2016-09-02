@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
+from .serializers import ClassifierSerializer
 from django.contrib.auth.models import User
+from rest_framework import viewsets
 from .models import Classifier
 
 
@@ -42,10 +44,15 @@ def trainer(request, pk):
         print("POSTING")
         text = request.POST.get('training_text')
         label = request.POST.get('label')
-        classifier.add_corpus(text, label)
+        classifier.add_corpus(label, text)
         return render(request, 'classy/trainer.html', context)
     else:
         return render(request, 'classy/trainer.html', context)
+
+
+class ClassifierViewSet(viewsets.ModelViewSet):
+    serializer_class = ClassifierSerializer
+    queryset = Classifier.objects.filter(is_visible=True)
 
 
 def signin(request):
