@@ -1,0 +1,14 @@
+{% extends 'classy/base.html' %}
+{% block body %}
+<div class="container">
+  <div class="row">
+  <div class="col-md-3">
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Register">
+    </form>
+</div>
+</div>
+</div>
+{% endblock %}

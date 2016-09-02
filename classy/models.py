@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 import pandas as pd
 import numpy as np
@@ -14,6 +15,7 @@ from sklearn import cross_validation
 class Classifier(models.Model):
     name = models.CharField(max_length=100)
     is_visible = models.BooleanField(default=True)
+    user = models.ForeignKey(User)
 
     def add_corpus(self, category, text):
         corp = Corpus(category=category.strip().lower(),
