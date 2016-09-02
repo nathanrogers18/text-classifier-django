@@ -12,12 +12,12 @@
 </div>
 <div class="container">
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#menu1">Trainer</a></li>
-    <li><a href="#menu2">Predicter</a></li>
+    <li class="active"><a href="#menu1">Predictor</a></li>
+    <li><a href="#menu2">Trainer</a></li>
   </ul>
 
   <div class="tab-content">
-    <div id="menu1" class="tab-pane active">
+    <div id="menu2" class="tab-pane">
       <div class="row">
         <br></br>
         <div class="col-md-4 col-md-offset-2">
@@ -28,14 +28,25 @@
         </div>
       </div>
     </div>
-    <div id="menu2" class="tab-pane">
+    <div id="menu1" class="tab-pane active">
       <div class="row">
         <br></br>
         <div class="col-md-4 col-md-offset-2">
-          <input class="form-control" type="text" placeholder="Input text here!">
+          <form method="POST">
+            {% csrf_token %}
+            {% if text %}
+            <input class="form-control" type="text" placeholder="{{ text }}" name="text">
+            {% else %}
+            <input class="form-control" type="text" placeholder="Input text here!" name="text">
+            {% endif %}
+          </form>
         </div>
         <div class="col-md-4">
+          {% if prediction %}
+          <input class="form-control" id="disabledInput" type="text" placeholder="{{ prediction }}" disabled>
+          {% else %}
           <input class="form-control" id="disabledInput" type="text" placeholder="Please, feed my friend on the left..." disabled>
+          {% endif %}
         </div>
       </div>
     </div>

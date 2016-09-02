@@ -1,10 +1,26 @@
 {% extends "classy/base.html" %}
+{% load staticfiles %}
 {% block body %}
-<div class="jumbotron">
-      <div class="container">
-        <h1>Stay, classy!</h1>
-        <p>This is our template landing page... probably needs a navbar and more stuff.  </p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Stay here! &raquo;</a></p>
-      </div>
+<div class="container">
+  <div class="row vertical-center">
+    <div class="col-md-8 col-md-offset-2">
+      <a class="navbar-brand text-center" href="/">Classy</a>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <select class="form-control" id="sel1" name="classifier">
+            <option>Select classifier:</option>
+            {% for id, name in classifiers %}
+            <option type="submit" name="classifier" value="{{ id }}" class="classifiers">{{ name }}</option>
+            {% endfor %}
+            </select>
+        </div>
+      </form>
+      <button type="button" id="createClassifier" class="btn btn-default">Create New Classifier</button>
     </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/index.js' %}" type="text/javascript"></script>
 {% endblock %}
