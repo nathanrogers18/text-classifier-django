@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'stay.wsgi.application'
 
 DATABASES = {
     'default': {
-
-
     }
 }
+
+DATABASES['default'] =  dj_database_url.config()
 
 AUTH_PASSWORD_VALIDATORS = [
     {

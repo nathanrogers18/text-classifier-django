@@ -49,6 +49,7 @@ def trainer(request, pk):
 
 
 def signin(request):
+    context = {}
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
@@ -56,6 +57,9 @@ def signin(request):
         if user is not None:
             login(request, user)
             return HttpResponseRedirect("/profile/{}".format(user.id))
+        else:
+            context['message'] = "Invalid login credentials"
+        return render(request, 'registration/login.html', context)
     else:
         return render(request, 'registration/login.html')
 
