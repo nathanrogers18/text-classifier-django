@@ -14,7 +14,7 @@ from sklearn import cross_validation
 class Classifier(models.Model):
     name = models.CharField(max_length=100)
     is_visible = models.BooleanField(default=True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, null=True)
 
     def add_corpus(self, category, text):
         corp = Corpus(classifier=self, category=category.strip().lower(),
@@ -27,7 +27,7 @@ class Classifier(models.Model):
                         token_pattern=r'[a-zA-Z]+|\s+|\_+|[^\w\d\s]',
                         )),
                         # ngram_range=(1, 5)
-                        # max_df=.4, 
+                        # max_df=.4,
             ('clf', MultinomialNB(0.0125)),
             ])
 
