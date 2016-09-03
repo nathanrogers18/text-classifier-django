@@ -10,7 +10,9 @@ from sklearn.metrics import accuracy_score
 from sklearn import cross_validation
 
 
-# Create your models here.
+DEFAULT_USER_ID = 1
+
+
 class Classifier(models.Model):
     name = models.CharField(max_length=100)
     is_visible = models.BooleanField(default=True)
