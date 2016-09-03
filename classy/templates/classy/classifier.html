@@ -17,17 +17,17 @@
       <form method="POST">
         {% csrf_token %}
         {% if text %}
-        <input class="form-control" type="text" placeholder="{{ text }}" name="text">
+        <input class="form-control input-lg" type="text" placeholder="{{ text }}" name="text">
         {% else %}
-        <input class="form-control" type="text" placeholder="Input text here!" name="text">
+        <input class="form-control input-lg" type="text" placeholder="Input text here!" name="text">
         {% endif %}
       </form>
     </div>
     <div class="col-md-4">
       {% if prediction %}
-      <input class="form-control" id="disabledInput" type="text" placeholder="{{ prediction }}" disabled>
+      <input class="form-control input-lg" id="disabledInput" type="text" placeholder="{{ prediction }}" disabled>
       {% else %}
-      <input class="form-control" id="disabledInput" type="text" placeholder="Please, feed my friend on the left..." disabled>
+      <input class="form-control input-lg" id="disabledInput" type="text" placeholder="Please, feed my friend on the left..." disabled>
       {% endif %}
     </div>
   </div>

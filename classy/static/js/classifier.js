@@ -1,20 +1,12 @@
-// $(document).ready(function(){
-//     $(".nav-tabs a").click(function(){
-//         $(this).tab('show');
-//     });
-//     $('.nav-tabs a').on('show.bs.tab');
-//     $('.nav-tabs a').on('shown.bs.tab');
-//     $('.nav-tabs a').on('hide.bs.tab');
-//     $('.nav-tabs a').on('hidden.bs.tab');
-// });
-
 $trainer = $('#trainer')
 $availableTags = $trainer.attr('availtags').split(" ")
 $trainer.autocomplete({
       source: $availableTags
     });
 
-// $( "#superform" ).submit(function( event ) {
-//   alert( "Handler for .submit() called." );
-//   event.preventDefault();
-// });
+$('input').keypress(function (e) {
+  if (e.which == 13) {
+    $('form#trainerForm').submit();
+    return false;
+  }
+});

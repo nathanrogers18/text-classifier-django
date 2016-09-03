@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
@@ -18,7 +17,7 @@ class Classifier(models.Model):
     user = models.ForeignKey(User)
 
     def add_corpus(self, category, text):
-        corp = Corpus(category=category.strip().lower(),
+        corp = Corpus(classifier=self, category=category.strip().lower(),
                       text=text)
         corp.save()
 
@@ -26,7 +25,9 @@ class Classifier(models.Model):
         pipe = Pipeline([
             ('vect', CountVectorizer(
                         token_pattern=r'[a-zA-Z]+|\s+|\_+|[^\w\d\s]',
-                        max_df=.4, ngram_range=(1, 5))),
+                        )),
+                        # ngram_range=(1, 5)
+                        # max_df=.4, 
             ('clf', MultinomialNB(0.0125)),
             ])
 
