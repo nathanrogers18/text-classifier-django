@@ -2,8 +2,8 @@
 {% extends 'classy/base.html' %}
 {% block body %}
 <div class="container">
-  <div class="row">
-  <div class="col-md-3">
+  <div class="row vertical-center">
+  <div class="col-md-3 col-md-offset-2">
     <form method="post" action="">
       {% csrf_token %}
       <fieldset>
@@ -18,6 +18,9 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
         <a href="/register/" class="btn btn-default" role="button">Register</a>
+        {% if message %}
+            <p class="text-danger">{{message}}</p>
+        {% endif %}
       </fieldset>
     </form>
 </div>

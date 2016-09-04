@@ -1,8 +1,8 @@
 {% extends 'classy/base.html' %}
 {% block body %}
 <div class="container">
-  <div class="row">
-  <div class="col-md-3">
+  <div class="row vertical-center">
+  <div class="col-md-8 col-md-offset-2">
     <form method="post">
       {% csrf_token %}
       {{ form }}

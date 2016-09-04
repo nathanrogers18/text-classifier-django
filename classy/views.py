@@ -66,9 +66,8 @@ def signin(request):
             return HttpResponseRedirect("/profile/{}".format(user.id))
         else:
             context['message'] = "Invalid login credentials"
-        return render(request, 'registration/login.html', context)
-    else:
-        return render(request, 'registration/login.html')
+
+    return render(request, 'registration/login.html', context)
 
 
 def signout(request):
