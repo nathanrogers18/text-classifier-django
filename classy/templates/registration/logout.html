@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>You're Out</h1>
-  </body>
-</html>
+{% extends "classy/base.html" %}
+{% load staticfiles %}
+{% block body %}
+    <div class="container">
+      <div class="row vertical-center">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="page-header"><h1>Classy</h1></div>
+          <p>
+            Thank you for using our classifiers, make sure to <em>stay classy</em>
+            and come back to visit next time you need something clasified!
+          </p>
+        </div>
+      </div>
+    </div>
+{% endblock %}
