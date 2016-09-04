@@ -1,33 +1,30 @@
 {% extends "classy/base.html" %}
 {% block body %}
       <div class="container">
-        <div class="row">
+        <div class="row bottom-bottom-2">
           <h1>Hello, {{ user.username|title }}!</h1>
           <hr>
         </div>
-      </div>
-      <div class="container">
-        <div class="row">
+        <div class="row bottom-bottom-2">
           <div class="col-md-6">
             <h3>Your Classifiers</h3>
             </div>
           </div>
-            <div class="row">
+            <div class="row bottom-bottom-2">
               <div class="col-md-2">
                 <button class="btn btn-primary pull-right" type="button" name="button">New Classifier</button>
               </div>
             </div>
         <div class="row">
-          <div class="col-md-4">
-            <ul>
-              <li>fix this layout</li>
+          <div class="col-md-4 bottom-bottom-2">
+            <div class="list-group">
               {% for classifier in user.classifier_set.all %}
-              <li>{{ classifier.name }}</li>
+              <a href="/classifier/{{ classifier.id }}" class="list-group-item">{{ classifier.name }}</a>
               {% endfor %}
-            </ul>
+            </div>
           </div>
         </div>
-        </div>
+      </div>
 
 
 {% endblock %}
