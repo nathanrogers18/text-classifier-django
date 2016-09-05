@@ -9,7 +9,6 @@ $delete_classifier.click(function() {
         type: 'PATCH',
         data: {
             is_visible: false,
-            'csrfmiddlewaretoken': document.cookie.match(/csrftoken=(\w*)/)[1],
         },
         error: function(e) {
             console.log('Failed to remove classifier visibility');
