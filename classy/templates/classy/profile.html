@@ -1,4 +1,5 @@
 {% extends "classy/base.html" %}
+{% load staticfiles %}
 {% block body %}
       <div class="container">
         <div class="row bottom-bottom-2">
@@ -15,16 +16,32 @@
                 <button class="btn btn-primary pull-right" type="button" name="button">New Classifier</button>
               </div>
             </div>
-        <div class="row">
-          <div class="col-md-4 bottom-bottom-2">
-            <div class="list-group">
-              {% for classifier in user.classifier_set.all %}
-              <a href="/classifier/{{ classifier.id }}" class="list-group-item">{{ classifier.name }}</a>
-              {% endfor %}
+         {% for classifier in user.classifier_set.all %}
+         {% if classifier.is_visible %}
+        <div id="profile_class_row" class="row">
+
+            <div id="profile_class_col" class="col-md-4">
+                <div id="profile_class_list_group" class="list-group">
+                  <a href="/classifier/{{ classifier.id }}" class="list-group-item">{{ classifier.name }}</a>
+                </div>
             </div>
+
+            <div id="profile_class_col" class="col-md-4">
+                  <button id="del_class_from_prof_button" type="button" class="btn btn-danger" name="button" value='{{ classifier.id }}'>Delete</button>
+            </div>
+
           </div>
+          {% endif %}
+          {% endfor %}
+
+
         </div>
       </div>
 
 
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/cookie.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/profile.js' %}" type="text/javascript"></script>
 {% endblock %}

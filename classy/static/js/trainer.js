@@ -1,5 +1,5 @@
-$trainer = $('#trainer');
-$availableTags = $trainer.attr('availtags').split(" ");
+var $trainer = $('#trainer');
+var $availableTags = $trainer.attr('availtags').split(" ");
 $trainer.autocomplete({
       source: $availableTags
     });
