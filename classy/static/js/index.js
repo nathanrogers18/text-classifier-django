@@ -27,16 +27,16 @@ $.ajaxSetup({
     }
 });
 
-$selector = $('#sel1')
+$selector = $('#sel1');
 
 $selector.change(function(){
   this.form.submit();
-})
+});
 
-$createClassifier = $('#createClassifier')
+$createClassifier = $('#createClassifier');
 $createClassifier.click(function(){
-  $name = $("input[name='classifier_name']").val()
-  $user = $("#userID").val()
+  $name = $("input[name='classifier_name']").val();
+  $user = $("#userID").val();
   $.ajax({
     method: 'POST',
     url:'/api/classifier/',
@@ -44,7 +44,7 @@ $createClassifier.click(function(){
            'user': $user,
            'is_visible': true},
     success: function() {
-      console.log("WOW")
+      console.log("WOW");
     }
-  })
-})
+});
+});
