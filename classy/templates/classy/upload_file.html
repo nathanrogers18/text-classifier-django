@@ -2,6 +2,14 @@
 {% load staticfiles %}
 {% block body %}
 
+<h1>Classifier File Upload</h1>
+<h4>Acceptable file format</h2>
+<ul>
+    <li>Format: .csv</li>
+    <li>Column 1: Categories</li>
+    <li>Column 2: Text</li>
+    <li>Row 1: Headers (will not be processed)</li>
+</ul>
 <form role="form" class="form" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {# Only add visible fields #}
