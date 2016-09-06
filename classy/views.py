@@ -85,7 +85,6 @@ def register(request):
         if user.is_valid():
             user.save()
             if user is not None:
-                print(user)
                 new_user = authenticate(username=user.cleaned_data['username'],
                                         password=user.cleaned_data['password1'])
                 login(request, new_user)
