@@ -44,7 +44,8 @@ $createClassifier.click(function(){
            'user': $user,
            'is_visible': true},
     success: function() {
-      console.log("WOW")
+      console.log("WOW");
+      $('#myModal').modal('hide');
     }
   })
 })
