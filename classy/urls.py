@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^logout/$', views.signout, name='logout'),
     url(r'^register/$', views.register, name='register'),
     url(r'^profile/[0-9]$', views.profile, name='profile'),
+    url(r'^upload_file/$', views.upload_file, name='upload_file'),
 ]

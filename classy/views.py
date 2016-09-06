@@ -5,7 +5,10 @@ from django.contrib.auth.forms import UserCreationForm
 from .serializers import ClassifierSerializer
 from django.contrib.auth.models import User
 from rest_framework import viewsets
-from .models import Classifier
+from .models import Classifier, Corpus
+from .forms import UploadFileForm
+import csv
+import codecs
 
 
 def index(request):
@@ -97,3 +100,27 @@ def profile(request):
     user_prof = User.objects.get(pk=request.user.id)
     context = {'user': user_prof}
     return render(request, 'classy/profile.html', context)
+
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            print('file received!')
+            file = request.FILES['file']
+            user_prof = User.objects.get(pk=request.user.id)
+            classifier = Classifier(name=request.POST['classifier_name'], user=user_prof)
+            classifier.save()
+            for chunk in file.chunks():
+                csv_data = chunk.decode()
+                print(type(csv_data), csv_data)
+                csv_rows = csv_data.split('\n')
+                for i in range(1, len(csv_rows)):
+                    row_values = csv_rows[i].split(',')
+                    corp = Corpus(classifier=classifier,
+                                  category=row_values[0], text=row_values[1])
+                    corp.save()
+            return HttpResponseRedirect('../')
+    else:
+        form = UploadFileForm()
+    return render(request, 'classy/upload_file.html', {'form': form})
